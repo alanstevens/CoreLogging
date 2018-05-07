@@ -1,9 +1,9 @@
 ﻿using System;
-using CoreLoggingAbstractions;
+using CoreLogging;
 using NSubstitute;
 using Xunit;
 
-namespace CoreLoggingAbstractionsTests
+namespace CoreLoggingTests
 {
     public class ApplicationLoggerTests
     {

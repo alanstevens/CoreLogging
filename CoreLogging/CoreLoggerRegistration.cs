@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreLoggingAbstractions
+namespace CoreLogging
 {
     public static class CoreLoggerRegistration
     {

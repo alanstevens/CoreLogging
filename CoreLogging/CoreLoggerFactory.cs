@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace CoreLoggingAbstractions
+namespace CoreLogging
 {
     public class CoreLoggerFactory : ICoreLoggerFactory
     {

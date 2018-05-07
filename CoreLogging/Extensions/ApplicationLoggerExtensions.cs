@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreLoggingAbstractions.Extensions
+namespace CoreLogging.Extensions
 {
     public static class ApplicationLoggerExtensions
     {

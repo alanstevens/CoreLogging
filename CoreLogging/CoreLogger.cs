@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Internal;
 
-namespace CoreLoggingAbstractions
+namespace CoreLogging
 {
     public class CoreLogger<T> : CoreLogger, ICoreLogger<T>
     {

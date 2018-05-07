@@ -1,11 +1,11 @@
 ﻿using System;
-using CoreLoggingAbstractions;
+using CoreLogging;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Internal;
 using NSubstitute;
 using Xunit;
 
-namespace CoreLoggingAbstractionsTests
+namespace CoreLoggingTests
 {
     public class CoreLoggerTests
     {

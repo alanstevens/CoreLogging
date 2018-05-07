@@ -1,10 +1,10 @@
 ﻿using System;
-using CoreLoggingAbstractions;
-using CoreLoggingAbstractions.Extensions;
+using CoreLogging;
+using CoreLogging.Extensions;
 using NSubstitute;
 using Xunit;
 
-namespace CoreLoggingAbstractionsTests
+namespace CoreLoggingTests
 {
     public class ApplicationLoggerExtensionsTests
     {

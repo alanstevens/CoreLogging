@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreLoggingAbstractions
+namespace CoreLogging
 {
     public interface ICoreLogger<T> : ICoreLogger
     {
