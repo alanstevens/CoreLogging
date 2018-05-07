@@ -2,6 +2,9 @@
 
 namespace CoreLoggingAbstractions
 {
+    public interface ICoreLogger<T> : ICoreLogger
+    {
+    }
     public interface ICoreLogger
     {
         //------------------------------------------DEBUG------------------------------------------//

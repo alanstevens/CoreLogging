@@ -9,6 +9,12 @@ namespace CoreLoggingAbstractions
 
         readonly ILoggerFactory _factory;
 
+        public ICoreLogger<T> CreateLogger<T>()
+        {
+            var logger = _factory.CreateLogger<T>();
+            return new CoreLogger<T>(logger);
+        }
+
         public ICoreLogger CreateLogger(Type loggingContext)
         {
             var logger = _factory.CreateLogger(loggingContext);

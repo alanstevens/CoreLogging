@@ -4,6 +4,11 @@ using Microsoft.Extensions.Logging.Internal;
 
 namespace CoreLoggingAbstractions
 {
+    public class CoreLogger<T> : CoreLogger, ICoreLogger<T>
+    {
+        public CoreLogger(ILogger logger) : base(logger) { }
+    }
+
     public class CoreLogger : ICoreLogger
     {
         public CoreLogger(ILogger logger)
