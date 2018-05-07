@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLoggingAbstractions", "CoreLoggingAbstractions\CoreLoggingAbstractions.csproj", "{3EB552B5-350D-40C7-9952-9D63487E3610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLoggingAbstractionsTests", "CoreLoggingAbstractionsTests\CoreLoggingAbstractionsTests.csproj", "{68E54F12-F811-4480-92E4-8F23985F6C3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EB552B5-350D-40C7-9952-9D63487E3610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB552B5-350D-40C7-9952-9D63487E3610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB552B5-350D-40C7-9952-9D63487E3610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB552B5-350D-40C7-9952-9D63487E3610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E54F12-F811-4480-92E4-8F23985F6C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E54F12-F811-4480-92E4-8F23985F6C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E54F12-F811-4480-92E4-8F23985F6C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E54F12-F811-4480-92E4-8F23985F6C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64830DA2-2F75-468F-8350-90F37CD0146A}
+	EndGlobalSection
+EndGlobal
