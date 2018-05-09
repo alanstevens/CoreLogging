@@ -1,12 +1,14 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions.Internal;
 using Microsoft.Extensions.Logging.Internal;
 
 namespace CoreLogging
 {
     public class CoreLogger<T> : CoreLogger, ICoreLogger<T>
     {
-        public CoreLogger(ILogger logger) : base(logger) { }
+        public CoreLogger(ILoggerFactory factory) 
+            : base(factory.CreateLogger(TypeNameHelper.GetTypeDisplayName(typeof(T)))) { }
     }
 
     public class CoreLogger : ICoreLogger

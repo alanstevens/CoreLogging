@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions.Internal;
 
 namespace CoreLogging
 {
@@ -11,13 +12,13 @@ namespace CoreLogging
 
         public ICoreLogger<T> CreateLogger<T>()
         {
-            var logger = _factory.CreateLogger<T>();
-            return new CoreLogger<T>(logger);
+            return new CoreLogger<T>(_factory);
         }
 
         public ICoreLogger CreateLogger(Type loggingContext)
         {
-            var logger = _factory.CreateLogger(loggingContext);
+            var contextName = TypeNameHelper.GetTypeDisplayName(loggingContext);
+            var logger = _factory.CreateLogger(contextName);
             return new CoreLogger(logger);
         }
     }
