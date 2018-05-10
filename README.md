@@ -14,13 +14,13 @@ There is also a generic `ICoreLogger<T>` which is what you should put on you con
 While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first solution is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. Call the `ApplictionLogger` like so:
 
 ``` C#
-ApplicationLogger.LogWarning(this, "Danger, Will Robinson!)
+ApplicationLogger.LogWarning(this, "Danger, Will Robinson!")
 ```
 
 Internally it uses a set of delgates.  If  `Initialize` is never called, the logging methods are no-op. If you want to verify logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
 
 ## Extension Methods
-This may be one step too far down the rabbit hole for some people. Because I want logging to be ambiently available everywhere, I created a set of extension methods on `object` forthe most common logging methods.  This means you can simply call `this.LogDebug("My message.)`. 
+This may be one step too far down the rabbit hole for some people. Because I want logging to be ambiently available everywhere, I created a set of extension methods on `object` for the most common logging methods.  This means you can simply call `this.LogDebug("My message.)`. 
 
 I put the extension methods in a seperate namespace so that they will not pollute your intellisense unless you explicitly import the namespace. The extension methods call `ApplicationLogger` internally, so they can be tested the same as above.
 
