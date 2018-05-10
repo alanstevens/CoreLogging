@@ -6,74 +6,74 @@ namespace CoreLogging.Extensions
     {
         //------------------------------------------DEBUG------------------------------------------//
 
-        public static void LogDebug(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogDebug(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogDebug(loggingContext, exception, message, args);
+            ApplicationLogger.LogDebug(loggingCategory, exception, message, args);
         }
 
-        public static void LogDebug(this object loggingContext, string message, params object[] args)
+        public static void LogDebug(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogDebug(loggingContext, null, message, args);
+            ApplicationLogger.LogDebug(loggingCategory, null, message, args);
         }
 
         //------------------------------------------TRACE------------------------------------------//
 
-        public static void LogTrace(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogTrace(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogTrace(loggingContext, exception, message, args);
+            ApplicationLogger.LogTrace(loggingCategory, exception, message, args);
         }
 
-        public static void LogTrace(this object loggingContext, string message, params object[] args)
+        public static void LogTrace(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogTrace(loggingContext, null, message, args);
+            ApplicationLogger.LogTrace(loggingCategory, null, message, args);
         }
 
         //------------------------------------------INFORMATION------------------------------------------//
 
-        public static void LogInformation(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogInformation(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogInformation(loggingContext, exception, message, args);
+            ApplicationLogger.LogInformation(loggingCategory, exception, message, args);
         }
 
-        public static void LogInformation(this object loggingContext, string message, params object[] args)
+        public static void LogInformation(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogInformation(loggingContext, null, message, args);
+            ApplicationLogger.LogInformation(loggingCategory, null, message, args);
         }
 
         //------------------------------------------WARNING------------------------------------------//
 
-        public static void LogWarning(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogWarning(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogWarning(loggingContext, exception, message, args);
+            ApplicationLogger.LogWarning(loggingCategory, exception, message, args);
         }
 
-        public static void LogWarning(this object loggingContext, string message, params object[] args)
+        public static void LogWarning(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogWarning(loggingContext, null, message, args);
+            ApplicationLogger.LogWarning(loggingCategory, null, message, args);
         }
 
         //------------------------------------------ERROR------------------------------------------//
 
-        public static void LogError(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogError(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogError(loggingContext, exception, message, args);
+            ApplicationLogger.LogError(loggingCategory, exception, message, args);
         }
 
-        public static void LogError(this object loggingContext, string message, params object[] args)
+        public static void LogError(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogError(loggingContext, null, message, args);
+            ApplicationLogger.LogError(loggingCategory, null, message, args);
         }
 
         //------------------------------------------CRITICAL------------------------------------------//
 
-        public static void LogCritical(this object loggingContext, Exception exception, string message, params object[] args)
+        public static void LogCritical(this object loggingCategory, Exception exception, string message, params object[] args)
         {
-            ApplicationLogger.LogCritical(loggingContext, exception, message, args);
+            ApplicationLogger.LogCritical(loggingCategory, exception, message, args);
         }
 
-        public static void LogCritical(this object loggingContext, string message, params object[] args)
+        public static void LogCritical(this object loggingCategory, string message, params object[] args)
         {
-            ApplicationLogger.LogCritical(loggingContext, null, message, args);
+            ApplicationLogger.LogCritical(loggingCategory, null, message, args);
         }
     }
 }

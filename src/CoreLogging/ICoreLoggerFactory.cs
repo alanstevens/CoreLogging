@@ -5,6 +5,6 @@ namespace CoreLogging
     public interface ICoreLoggerFactory
     {
         ICoreLogger<T> CreateLogger<T>();
-        ICoreLogger CreateLogger(Type loggingContext);
+        ICoreLogger CreateLogger(Type loggingCategory);
     }
 }

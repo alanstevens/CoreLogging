@@ -6,10 +6,16 @@ It is exciting that logging is a first class service in the dotnet core framewor
 ## Testable Interfaces
 While Microsoft provides an `ILogger` interface, the frequently called logging methods are all extension methods. This makes it difficult to determine if your logging message was called. Steve Smith has an excellent [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these difficulties.
 
-I have followed his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger` and `CoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods.
+I have followed his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger` and `CoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods
+
+There is also a generic `ICoreLogger<T>` which is what you should put on you constructor for dependency injection..
 
 ## Static Logger
-While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first solution is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. 
+While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first solution is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. Call the `ApplictionLogger` like so:
+
+``` C#
+ApplicationLogger.LogWarning(this, "Danger, Will Robinson!)
+```
 
 Internally it uses a set of delgates.  If  `Initialize` is never called, the logging methods are no-op. If you want to verify logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
 
@@ -22,4 +28,10 @@ I put the extension methods in a seperate namespace so that they will not pollut
 See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. Note that some tests fail intermittently when running all tests but succeed when run individually. I'd love a pull request that fixes this.
 
 ## Startup
-There is a `.AddCoreLogging()` extension method on `ServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs`.
+There is a `.AddCoreLogging()` extension method on `ServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
+
+``` C#
+            services.AddMvc()
+                .Services
+                .AddCoreLogging();
+```

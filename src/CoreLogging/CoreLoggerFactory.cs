@@ -15,10 +15,10 @@ namespace CoreLogging
             return new CoreLogger<T>(_factory);
         }
 
-        public ICoreLogger CreateLogger(Type loggingContext)
+        public ICoreLogger CreateLogger(Type loggingCategory)
         {
-            var contextName = TypeNameHelper.GetTypeDisplayName(loggingContext);
-            var logger = _factory.CreateLogger(contextName);
+            var CategoryName = TypeNameHelper.GetTypeDisplayName(loggingCategory);
+            var logger = _factory.CreateLogger(CategoryName);
             return new CoreLogger(logger);
         }
     }
