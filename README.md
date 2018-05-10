@@ -27,6 +27,8 @@ I put the extension methods in a seperate namespace so that they will not pollut
 ## Testing
 See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. Note that some tests fail intermittently when running all tests but succeed when run individually. I'd love a pull request that fixes this.
 
+There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
+
 ## Startup
 There is a `.AddCoreLogging()` extension method on `ServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
 
