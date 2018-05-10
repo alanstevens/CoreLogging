@@ -1,17 +1,17 @@
 # Core Logging
 This project is a set of abstractons over the dotnet core logging framework.
 
-It is exciting that logging is a first class service in the dotnet core framework. Here you will find some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction.
+It is exciting that [logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x) is a first class service in the dotnet core framework. Here you will find some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction.
 
 ## Testable Interfaces
 While Microsoft provides an `ILogger` interface, the frequently called logging methods are all extension methods. This makes it difficult to determine if your logging message was called. Steve Smith has an excellent [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these difficulties.
 
 I have followed his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger` and `CoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods
 
-There is also a generic `ICoreLogger<T>` which is what you should put on you constructor for dependency injection..
+There is also a generic `ICoreLogger<T>` which is what you should put on your constructor for dependency injection..
 
 ## Static Logger
-While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first solution is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. Call the `ApplictionLogger` like so:
+While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. Call the `ApplictionLogger` like so:
 
 ``` C#
 ApplicationLogger.LogWarning(this, "Danger, Will Robinson!")
