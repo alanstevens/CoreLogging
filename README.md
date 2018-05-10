@@ -6,7 +6,7 @@ It is exciting that [logging](https://docs.microsoft.com/en-us/aspnet/core/funda
 ## Testable Interfaces
 While Microsoft provides an `ILogger` interface, the frequently called logging methods are all extension methods. This makes it difficult to determine if your logging message was called. Steve Smith has an excellent [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these difficulties.
 
-I have followed his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger` and `CoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods
+I followed his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger` and `CoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods
 
 There is also a generic `ICoreLogger<T>` which is what you should put on your constructor for dependency injection..
 
@@ -30,7 +30,7 @@ See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/
 There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
 
 ## Startup
-There is a `.AddCoreLogging()` extension method on `ServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
+There is a `.AddCoreLogging()` extension method on `IServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
 
 ``` C#
             services.AddMvc()
