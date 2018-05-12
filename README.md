@@ -17,15 +17,17 @@ While injecting an `ICoreLogger` is neat and testable, putting the interface on 
 ApplicationLogger.LogWarning(this, "Danger, Will Robinson!")
 ```
 
-Internally it uses a set of delgates.  If  `Initialize` is never called, the logging methods are no-op. If you want to verify logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
+Internally it uses a set of delgates.  If  `Initialize()` is never called, the logging methods are no-op. If you want to verify logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
 
 ## Extension Methods
-This may be one step too far down the rabbit hole for some people. Because I want logging to be ambiently available everywhere, I created a set of extension methods on `object` for the most common logging methods.  This means you can simply call `this.LogDebug("My message.)`. 
+This may be one step too far down the rabbit hole for some people. Because I want logging to be ambiently available everywhere, I created a set of extension methods on `object` for the most common logging methods.  This means you can simply call `this.LogDebug("Bow ties are cool.")`. 
 
 I put the extension methods in a seperate namespace so that they will not pollute your intellisense unless you explicitly import the namespace. The extension methods call `ApplicationLogger` internally, so they can be tested the same as above.
 
 ## Testing
-See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. Note that some tests fail intermittently when running all tests but succeed when run individually. I'd love a pull request that fixes this.
+See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. 
+
+Note that some tests fail intermittently when running all tests but succeed when run individually. I'd love a pull request that fixes this.
 
 There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
 

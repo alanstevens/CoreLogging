@@ -10,15 +10,12 @@ namespace CoreLogging
 
         readonly ILoggerFactory _factory;
 
-        public ICoreLogger<T> CreateLogger<T>()
-        {
-            return new CoreLogger<T>(_factory);
-        }
+        public ICoreLogger<T> CreateLogger<T>() => new CoreLogger<T>(_factory);
 
         public ICoreLogger CreateLogger(Type loggingCategory)
         {
-            var CategoryName = TypeNameHelper.GetTypeDisplayName(loggingCategory);
-            var logger = _factory.CreateLogger(CategoryName);
+            var categoryName = TypeNameHelper.GetTypeDisplayName(loggingCategory);
+            var logger = _factory.CreateLogger(categoryName);
             return new CoreLogger(logger);
         }
     }

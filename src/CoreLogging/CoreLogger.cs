@@ -13,10 +13,7 @@ namespace CoreLogging
 
     public class CoreLogger : ICoreLogger
     {
-        public CoreLogger(ILogger logger)
-        {
-            _logger = logger;
-        }
+        public CoreLogger(ILogger logger) => _logger = logger;
 
         readonly ILogger _logger;
 
