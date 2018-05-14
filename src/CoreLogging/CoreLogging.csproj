@@ -3,6 +3,17 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.0</TargetFramework>
         <OutputType>Library</OutputType>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>0.9.0</Version>
+        <Authors>H. Alan Stevens</Authors>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/alanstevens/CoreLogging/master/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/alanstevens/CoreLogging</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/alanstevens/CoreLogging</RepositoryUrl>
+        <Description>Abstractions for the dotnet core logging framework.</Description>
+        <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+        <PackageTags>log logging</PackageTags>
+        <Company />
+        <Product>Core Logging</Product>
     </PropertyGroup>
 
     <ItemGroup>
