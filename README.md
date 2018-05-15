@@ -31,7 +31,7 @@ this.LogInformation("Bow ties are cool.");
 The extension methods are in a separate namespace, so they will not pollute your intellisense unless you explicitly import them. The extension methods call `ApplicationLogger` internally, so they can be tested the same as above.
 
 ## Testing
-See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. 
+See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches described above. 
 
 ## Startup
 There is a `.AddCoreLogging()` extension method on `IServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:

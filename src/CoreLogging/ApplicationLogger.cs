@@ -33,8 +33,9 @@ namespace CoreLogging
 
         static ICoreLogger CreateLogger(object loggingCategory)
         {
-            var CategoryType = GetCategoryType(loggingCategory);
-            return _factory.CreateLogger(CategoryType);
+            var categoryType = GetCategoryType(loggingCategory);
+            var factory = _factory;
+            return factory.CreateLogger(categoryType);
         }
 
         static Type GetCategoryType(object source)
