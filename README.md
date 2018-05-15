@@ -7,7 +7,6 @@ https://www.nuget.org/packages/corelogging
 
 It is welcome news that [logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x) is a first class service in the dotnet core framework. This project provides some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction.
 
-
 ## Testable Interfaces
 While Microsoft provides an `ILogger` interface, the frequently called logging methods are all extension methods. This makes it difficult to determine if your logging message was called. Steve Smith has an excellent [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these difficulties.
 
@@ -16,16 +15,16 @@ I followed his recommendation to use an adapter to wrap the framework `Logger`. 
 There is also a generic `ICoreLogger<T>` which you should use on your constructor for dependency injection..
 
 ## Static Logger
-While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I believe Logging should be available everywhere. My first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. `ApplicationLogger` is safe to call at test time. Call the `ApplictionLogger` like so:
+While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I wat logging available everywhere. My first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. but `ApplicationLogger` is safe to call at test time.  If  `Initialize()` is never called, the logging methods are no-op.
 
+Call the `ApplictionLogger` like so:
 ``` C#
 ApplicationLogger.LogWarning(this, "Danger, Will Robinson!")
 ```
-
- If  `Initialize()` is never called, the logging methods are no-op. If you want to verify logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
+To test logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
 
 ## Extension Methods
-This may be one step too far down the rabbit hole for some people. I want logging to be ambiently available everywhere. I created a set of extension methods on `object` for the most common logging methods.  This means you can simply call:
+This may be one step too far down the rabbit hole for some people. I want logging to be ambiently available everywhere. To that end, I created a set of extension methods on `object` for the most common logging methods.  This means you can simply call:
 ``` C#
 this.LogInformation("Bow ties are cool.")`
 ```
@@ -33,10 +32,6 @@ I put the extension methods in a seperate namespace so that they will not pollut
 
 ## Testing
 See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches I describe above. 
-
-Note that some tests fail intermittently when running all tests but succeed when run individually. I'd love a pull request that fixes this.
-
-There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
 
 ## Startup
 There is a `.AddCoreLogging()` extension method on `IServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
@@ -46,3 +41,9 @@ There is a `.AddCoreLogging()` extension method on `IServiceCollection` to confi
                 .Services
                 .AddCoreLogging();
 ```
+
+---
+There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
+
+---
+NOTE:  Some tests [fail intermittently](https://github.com/alanstevens/CoreLogging/issues/1) when running all tests, but succeed when run individually. I welcome a pull request to fix this.
