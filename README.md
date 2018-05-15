@@ -15,7 +15,7 @@ I followed his recommendation to use an adapter to wrap the framework `Logger`. 
 There is also a generic `ICoreLogger<T>` which you should use on your constructor for dependency injection..
 
 ## Static Logger
-While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I wat logging available everywhere. My first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. but `ApplicationLogger` is safe to call at test time.  If  `Initialize()` is never called, the logging methods are no-op.
+While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. I want logging available everywhere. My first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. but `ApplicationLogger` is safe to call at test time.  If  `Initialize()` is never called, the logging methods are no-op.
 
 Call the `ApplictionLogger` like so:
 ``` C#
