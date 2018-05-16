@@ -44,6 +44,3 @@ There is a `.AddCoreLogging()` extension method on `IServiceCollection` to confi
 
 ---
 There is a [sample](https://github.com/alanstevens/CoreLogging/blob/master/src/Sample/Controllers/HomeController.cs#L17) which demonstrates all three logging approaches.
-
----
-NOTE:  Some tests [fail intermittently](https://github.com/alanstevens/CoreLogging/issues/1) when running all tests, but succeed when run individually. I welcome a pull request to fix this.
