@@ -23,7 +23,7 @@ namespace CoreLoggingTests
 
         void Validate(LogLevel logLevel, Exception exception = null)
         {
-            // NOTE: I can't find a way to validate message or args.
+            // NOTE: I can't find a way to validate message or args. HAS
             _logger.Received().Log(logLevel, 0, Arg.Any<FormattedLogValues>(), exception, Arg.Any<Func<FormattedLogValues, Exception, string>>());
         }
 

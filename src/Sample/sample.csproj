@@ -1,20 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>sample</AssemblyName>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-  </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="CoreLogging">
-      <HintPath>..\CoreLogging\bin\Debug\netcoreapp2.0\CoreLogging.dll</HintPath>
+      <HintPath>..\CoreLogging\bin\Debug\netcoreapp3.1\CoreLogging.dll</HintPath>
     </Reference>
   </ItemGroup>
 
