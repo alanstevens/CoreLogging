@@ -1,8 +1,9 @@
-﻿using System;
-
-namespace CoreLogging
+﻿namespace CoreLogging
 {
-    public interface ICoreLoggerFactory
+    using System;
+    using Microsoft.Extensions.Logging;
+
+    public interface ICoreLoggerFactory : ILoggerFactory
     {
         ICoreLogger<T> CreateLogger<T>();
         ICoreLogger CreateLogger(Type loggingCategory);

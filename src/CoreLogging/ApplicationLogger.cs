@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
-
-namespace CoreLogging
+﻿namespace CoreLogging
 {
+    using System;
+    using Microsoft.Extensions.Logging;
+
     public static class ApplicationLogger
     {
         static Action<object, Exception, string, object[]> Debug = (loggingCategory, exception, message, args) => { };
@@ -21,6 +21,7 @@ namespace CoreLogging
 
         public static void Initialize(ICoreLoggerFactory factory)
         {
+            if (factory is null) throw new ArgumentNullException(nameof(factory));
             _factory = factory;
 
             Debug = LogDebugInternal;
@@ -33,9 +34,9 @@ namespace CoreLogging
 
         static ICoreLogger CreateLogger(object loggingCategory)
         {
+            if (_factory is null) throw new ArgumentNullException(nameof(_factory));
             var categoryType = GetCategoryType(loggingCategory);
-            var factory = _factory;
-            return factory.CreateLogger(categoryType);
+            return _factory.CreateLogger(categoryType);
         }
 
         static Type GetCategoryType(object source)

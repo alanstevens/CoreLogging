@@ -1,12 +1,12 @@
-﻿using System;
-using CoreLogging;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
-using NSubstitute;
-using Xunit;
-
-namespace CoreLoggingTests
+﻿namespace CoreLoggingTests
 {
+    using System;
+    using CoreLogging;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Internal;
+    using NSubstitute;
+    using Xunit;
+
     public class CoreLoggerTests
     {
         public CoreLoggerTests()
@@ -16,15 +16,34 @@ namespace CoreLoggingTests
             _coreLogger = new CoreLogger(_logger);
         }
 
-        readonly CoreLogger _coreLogger;
-        readonly ILogger _logger;
-        readonly string _message = "message";
-        readonly Exception _exception = new Exception();
+        private readonly CoreLogger _coreLogger;
+        private readonly ILogger _logger;
+        private readonly string _message = "message";
+        private readonly Exception _exception = new Exception();
 
-        void Validate(LogLevel logLevel, Exception exception = null)
+        private void Validate(LogLevel logLevel, Exception exception = null)
         {
             // NOTE: I can't find a way to validate message or args. HAS
-            _logger.Received().Log(logLevel, 0, Arg.Any<FormattedLogValues>(), exception, Arg.Any<Func<FormattedLogValues, Exception, string>>());
+            _logger.Received().Log(
+                logLevel,
+                0,
+                Arg.Any<FormattedLogValues>(),
+                exception,
+                Arg.Any<Func<FormattedLogValues, Exception, string>>());
+        }
+
+        [Fact]
+        public void should_call_logcritical()
+        {
+            _coreLogger.LogCritical(_message);
+            Validate(LogLevel.Critical);
+        }
+
+        [Fact]
+        public void should_call_logcritical_with_exception()
+        {
+            _coreLogger.LogCritical(_exception, _message);
+            Validate(LogLevel.Critical, _exception);
         }
 
         [Fact]
@@ -42,17 +61,17 @@ namespace CoreLoggingTests
         }
 
         [Fact]
-        public void should_call_Trace()
+        public void should_call_logerror()
         {
-            _coreLogger.LogTrace(_message);
-            Validate(LogLevel.Trace);
+            _coreLogger.LogError(_message);
+            Validate(LogLevel.Error);
         }
 
         [Fact]
-        public void should_call_logtrace_with_exception()
+        public void should_call_logerror_with_exception()
         {
-            _coreLogger.LogTrace(_exception, _message);
-            Validate(LogLevel.Trace, _exception);
+            _coreLogger.LogError(_exception, _message);
+            Validate(LogLevel.Error, _exception);
         }
 
         [Fact]
@@ -70,6 +89,13 @@ namespace CoreLoggingTests
         }
 
         [Fact]
+        public void should_call_logtrace_with_exception()
+        {
+            _coreLogger.LogTrace(_exception, _message);
+            Validate(LogLevel.Trace, _exception);
+        }
+
+        [Fact]
         public void should_call_logwarning()
         {
             _coreLogger.LogWarning(_message);
@@ -84,31 +110,10 @@ namespace CoreLoggingTests
         }
 
         [Fact]
-        public void should_call_logerror()
+        public void should_call_Trace()
         {
-            _coreLogger.LogError(_message);
-            Validate(LogLevel.Error);
-        }
-
-        [Fact]
-        public void should_call_logerror_with_exception()
-        {
-            _coreLogger.LogError(_exception, _message);
-            Validate(LogLevel.Error, _exception);
-        }
-
-        [Fact]
-        public void should_call_logcritical()
-        {
-            _coreLogger.LogCritical(_message);
-            Validate(LogLevel.Critical);
-        }
-
-        [Fact]
-        public void should_call_logcritical_with_exception()
-        {
-            _coreLogger.LogCritical(_exception, _message);
-            Validate(LogLevel.Critical, _exception);
+            _coreLogger.LogTrace(_message);
+            Validate(LogLevel.Trace);
         }
     }
 }

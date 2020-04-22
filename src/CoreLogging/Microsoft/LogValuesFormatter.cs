@@ -8,12 +8,12 @@ using System.Linq;
 using System.Globalization;
 using System.Text;
 
-namespace Microsoft.Extensions.Logging.Internal
+namespace Microsoft.Extensions.Logging
 {
     /// <summary>
     /// Formatter to convert the named format items like {NamedformatItem} to <see cref="M:string.Format"/> format.
     /// </summary>
-    public class LogValuesFormatter
+    internal class LogValuesFormatter
     {
         private const string NullValue = "(null)";
         private static readonly object[] EmptyArray = new object[0];
@@ -34,9 +34,6 @@ namespace Microsoft.Extensions.Logging.Internal
                 var openBraceIndex = FindBraceIndex(format, '{', scanIndex, endIndex);
                 var closeBraceIndex = FindBraceIndex(format, '}', openBraceIndex, endIndex);
 
-                // Format item syntax : { index[,alignment][ :formatString] }.
-                var formatDelimiterIndex = FindIndexOfAny(format, FormatDelimiters, openBraceIndex, closeBraceIndex);
-
                 if (closeBraceIndex == endIndex)
                 {
                     sb.Append(format, scanIndex, endIndex - scanIndex);
@@ -44,6 +41,9 @@ namespace Microsoft.Extensions.Logging.Internal
                 }
                 else
                 {
+                    // Format item syntax : { index[,alignment][ :formatString] }.
+                    var formatDelimiterIndex = FindIndexOfAny(format, FormatDelimiters, openBraceIndex, closeBraceIndex);
+
                     sb.Append(format, scanIndex, openBraceIndex - scanIndex + 1);
                     sb.Append(_valueNames.Count.ToString(CultureInfo.InvariantCulture));
                     _valueNames.Add(format.Substring(openBraceIndex + 1, formatDelimiterIndex - openBraceIndex - 1));
@@ -119,30 +119,31 @@ namespace Microsoft.Extensions.Logging.Internal
             {
                 for (int i = 0; i < values.Length; i++)
                 {
-                    var value = values[i];
-
-                    if (value == null)
-                    {
-                        values[i] = NullValue;
-                        continue;
-                    }
-
-                    // since 'string' implements IEnumerable, special case it
-                    if (value is string)
-                    {
-                        continue;
-                    }
-
-                    // if the value implements IEnumerable, build a comma separated string.
-                    var enumerable = value as IEnumerable;
-                    if (enumerable != null)
-                    {
-                        values[i] = string.Join(", ", enumerable.Cast<object>().Select(o => o ?? NullValue));
-                    }
+                    values[i] = FormatArgument(values[i]);
                 }
             }
 
             return string.Format(CultureInfo.InvariantCulture, _format, values ?? EmptyArray);
+        }
+
+        internal string Format()
+        {
+            return _format;
+        }
+
+        internal string Format(object arg0)
+        {
+            return string.Format(CultureInfo.InvariantCulture, _format, FormatArgument(arg0));
+        }
+
+        internal string Format(object arg0, object arg1)
+        {
+            return string.Format(CultureInfo.InvariantCulture, _format, FormatArgument(arg0), FormatArgument(arg1));
+        }
+
+        internal string Format(object arg0, object arg1, object arg2)
+        {
+            return string.Format(CultureInfo.InvariantCulture, _format, FormatArgument(arg0), FormatArgument(arg1), FormatArgument(arg2));
         }
 
         public KeyValuePair<string, object> GetValue(object[] values, int index)
@@ -171,5 +172,29 @@ namespace Microsoft.Extensions.Logging.Internal
             valueArray[valueArray.Length - 1] = new KeyValuePair<string, object>("{OriginalFormat}", OriginalFormat);
             return valueArray;
         }
+
+        private object FormatArgument(object value)
+        {
+            if (value == null)
+            {
+                return NullValue;
+            }
+
+            // since 'string' implements IEnumerable, special case it
+            if (value is string)
+            {
+                return value;
+            }
+
+            // if the value implements IEnumerable, build a comma separated string.
+            var enumerable = value as IEnumerable;
+            if (enumerable != null)
+            {
+                return string.Join(", ", enumerable.Cast<object>().Select(o => o ?? NullValue));
+            }
+
+            return value;
+        }
+
     }
 }

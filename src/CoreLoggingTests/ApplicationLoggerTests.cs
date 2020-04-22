@@ -1,11 +1,11 @@
-﻿using System;
-using CoreLogging;
-using CoreLogging.Extensions;
-using NSubstitute;
-using Xunit;
-
-namespace CoreLoggingTests
+﻿namespace CoreLoggingTests
 {
+    using System;
+    using CoreLogging;
+    using CoreLogging.Extensions;
+    using NSubstitute;
+    using Xunit;
+
     public class ApplicationLoggerTests
     {
         public ApplicationLoggerTests()

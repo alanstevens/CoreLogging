@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CoreLogging.Extensions
+﻿namespace CoreLogging.Extensions
 {
+    using System;
+
     public static class ApplicationLoggerExtensions
     {
         //------------------------------------------DEBUG------------------------------------------//

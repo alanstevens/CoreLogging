@@ -1,11 +1,13 @@
-﻿using System;
-
-namespace CoreLogging
+﻿namespace CoreLogging
 {
-    public interface ICoreLogger<T> : ICoreLogger
+    using System;
+    using Microsoft.Extensions.Logging;
+
+    public interface ICoreLogger<T> : ICoreLogger, ILogger<T>
     {
     }
-    public interface ICoreLogger
+
+    public interface ICoreLogger : ILogger
     {
         //------------------------------------------DEBUG------------------------------------------//
 
