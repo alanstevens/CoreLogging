@@ -48,38 +48,32 @@
 
         static void LogDebugInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogDebug(exception, message, args);
+            CreateLogger(loggingCategory).LogDebug(exception, message, args);
         }
 
         static void LogTraceInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogTrace(exception, message, args);
+            CreateLogger(loggingCategory).LogTrace(exception, message, args);
         }
 
         static void LogInformationInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogInformation(exception, message, args);
+            CreateLogger(loggingCategory).LogInformation(exception, message, args);
         }
 
         static void LogWarningInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogWarning(exception, message, args);
+            CreateLogger(loggingCategory).LogWarning(exception, message, args);
         }
 
         static void LogErrorInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogError(exception, message, args);
+            CreateLogger(loggingCategory).LogError(exception, message, args);
         }
 
         static void LogCriticalInternal(object loggingCategory, Exception exception, string message, params object[] args)
         {
-            var logger = CreateLogger(loggingCategory);
-            logger.LogCritical(exception, message, args);
+            CreateLogger(loggingCategory).LogCritical(exception, message, args);
         }
 
         //------------------------------------------DEBUG------------------------------------------//
