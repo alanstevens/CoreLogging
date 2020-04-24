@@ -9,6 +9,7 @@
 
         public CoreLoggerFactory(ILoggerFactory factory)
         {
+            if(factory is null) throw new ArgumentNullException(nameof(factory));
             _factory = factory;
         }
 
