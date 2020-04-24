@@ -71,12 +71,6 @@
 
         //---------------------------------------------LOG--------------------------------------------//
 
-        void Log(LogLevel logLevel, string message, object[] args);
-
-        void Log(LogLevel logLevel, EventId eventId, string message, object[] args);
-
-        void Log(LogLevel logLevel, Exception exception, string message, object[] args);
-
         void Log(LogLevel logLevel, EventId eventId, Exception exception, string message, object[] args);
     }
 }

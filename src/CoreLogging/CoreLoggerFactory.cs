@@ -1,7 +1,6 @@
 ﻿namespace CoreLogging
 {
     using System;
-    using Microsoft.Extensions.Internal;
     using Microsoft.Extensions.Logging;
 
     public class CoreLoggerFactory : ICoreLoggerFactory
@@ -18,24 +17,34 @@
             return new CoreLogger<T>(_factory);
         }
 
-        public ICoreLogger CreateLogger(Type loggingCategory)
+        public ICoreLogger CreateLogger(object loggingCategory)
         {
-            var categoryName = TypeNameHelper.GetTypeDisplayName(loggingCategory);
-            return CreateLogger(categoryName) as ICoreLogger;
+            var sourceType = GetSourceType(loggingCategory);
+
+            var logger = LoggerFactoryExtensions.CreateLogger(_factory, sourceType);
+            return new CoreLogger(logger);
         }
 
-        public ILogger CreateLogger(string categoryName)
+        private static Type GetSourceType(object source)
+        {
+            var sourceType = source.GetType();
+            if (sourceType == typeof(Type))
+                sourceType = source as Type;
+            return sourceType;
+        }
+
+        ILogger ILoggerFactory.CreateLogger(string categoryName)
         {
             var logger = _factory.CreateLogger(categoryName);
             return new CoreLogger(logger);
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
-            _factory.Dispose();
+            _factory?.Dispose();
         }
 
-        public void AddProvider(ILoggerProvider provider)
+        void ILoggerFactory.AddProvider(ILoggerProvider provider)
         {
             _factory.AddProvider(provider);
         }

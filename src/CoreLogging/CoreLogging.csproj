@@ -1,23 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <OutputType>Library</OutputType>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>0.9.0</Version>
+        <Version>0.9.1</Version>
         <Authors>H. Alan Stevens</Authors>
         <PackageLicenseUrl>https://raw.githubusercontent.com/alanstevens/CoreLogging/master/LICENSE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/alanstevens/CoreLogging</PackageProjectUrl>
         <RepositoryUrl>https://github.com/alanstevens/CoreLogging</RepositoryUrl>
-        <Description>Abstractions for the dotnet core logging framework.</Description>
-        <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+        <Description>Abstractions for the .NET Core logging framework.</Description>
+        <PackageReleaseNotes>Compatibility with .NET Core framework 3.1.</PackageReleaseNotes>
         <PackageTags>log logging</PackageTags>
         <Company />
         <Product>Core Logging</Product>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <AssemblyVersion>0.9.1.0</AssemblyVersion>
+        <FileVersion>0.9.1.0</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="ICoreLoggerFactory,cs" />
+      <None Include="..\..\..\extensions\LICENSE.txt">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
