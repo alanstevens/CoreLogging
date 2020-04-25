@@ -18,6 +18,22 @@
         readonly Exception _exception = new Exception();
         readonly TestLogger _testLogger = new TestLogger();
 
+        //------------------------------------------LOG------------------------------------------//
+
+        [Fact]
+        public void should_call_log()
+        {
+            ApplicationLogger.Log(this, LogLevel.Debug, default, null, _message);
+            _testLogger.Validate(LogLevel.Debug, _message);
+        }
+
+        [Fact]
+        public void should_call_log_with_exception()
+        {
+            ApplicationLogger.Log(this, LogLevel.Critical, default, _exception, _message);
+            _testLogger.Validate(LogLevel.Critical, _message, _exception);
+        }
+
         //------------------------------------------DEBUG------------------------------------------//
 
         [Fact]

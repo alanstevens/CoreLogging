@@ -37,9 +37,10 @@
             EventId.ShouldBe(eventId);
         }
     }
+
     internal class TestLoggerFactory : ILoggerFactory
     {
-        private readonly ILogger _logger;
+        readonly ILogger _logger;
 
         public TestLoggerFactory(ILogger logger)
         {
