@@ -2,12 +2,13 @@
 {
     using System;
     using CoreLogging;
+    using CoreLogging.Extensions;
     using Microsoft.Extensions.Logging;
     using Xunit;
 
-    public class ApplicationLoggerTests
+    public class CoreLoggerExtensionsTests
     {
-        public ApplicationLoggerTests()
+        public CoreLoggerExtensionsTests()
         {
             var factory = new TestLoggerFactory(_testLogger);
 
@@ -21,96 +22,96 @@
         //------------------------------------------DEBUG------------------------------------------//
 
         [Fact]
-        public void should_call_logdebug()
+        public void should_call_logdebug_extension()
         {
-            ApplicationLogger.LogDebug(this, _message);
+            this.LogDebug(_message);
             _testLogger.Validate(LogLevel.Debug, _message);
         }
 
         [Fact]
-        public void should_call_logdebug_with_exception()
+        public void should_call_logdebug_with_exception_extension()
         {
-            ApplicationLogger.LogDebug(this, _message, _exception);
+            this.LogDebug(_message, _exception);
             _testLogger.Validate(LogLevel.Debug, _message, _exception);
         }
 
         //------------------------------------------TRACE------------------------------------------//
 
         [Fact]
-        public void should_call_logtrace()
+        public void should_call_logtrace_extension()
         {
-            ApplicationLogger.LogTrace(this, _message);
+            this.LogTrace(_message);
             _testLogger.Validate(LogLevel.Trace, _message);
         }
 
         [Fact]
-        public void should_call_logtrace_with_exception()
+        public void should_call_logtrace_with_exception_extension()
         {
-            ApplicationLogger.LogTrace(this, _message, _exception);
+            this.LogTrace(_message, _exception);
             _testLogger.Validate(LogLevel.Trace, _message, _exception);
         }
 
         //------------------------------------------INFORMATION------------------------------------------//
 
         [Fact]
-        public void should_call_loginformation()
+        public void should_call_loginformation_extension()
         {
-            ApplicationLogger.LogInformation(this, _message);
+            this.LogInformation(_message);
             _testLogger.Validate(LogLevel.Information, _message);
         }
 
         [Fact]
-        public void should_call_loginformation_with_exception()
+        public void should_call_loginformation_with_exception_extension()
         {
-            ApplicationLogger.LogInformation(this, _message, _exception);
+            this.LogInformation(_message, _exception);
             _testLogger.Validate(LogLevel.Information, _message, _exception);
         }
 
         //------------------------------------------WARNING------------------------------------------//
 
         [Fact]
-        public void should_call_logwarning()
+        public void should_call_logwarning_extension()
         {
-            ApplicationLogger.LogWarning(this, _message);
+            this.LogWarning(_message);
             _testLogger.Validate(LogLevel.Warning, _message);
         }
 
         [Fact]
-        public void should_call_logwarning_with_exception()
+        public void should_call_logwarning_with_exception_extension()
         {
-            ApplicationLogger.LogWarning(this, _message, _exception);
+            this.LogWarning(_message, _exception);
             _testLogger.Validate(LogLevel.Warning, _message, _exception);
         }
 
         //------------------------------------------ERROR------------------------------------------//
 
         [Fact]
-        public void should_call_logerror()
+        public void should_call_logerror_extension()
         {
-            ApplicationLogger.LogError(this, _message);
+            this.LogError(_message);
             _testLogger.Validate(LogLevel.Error, _message);
         }
 
         [Fact]
-        public void should_call_logerror_with_exception()
+        public void should_call_logerror_with_exception_extension()
         {
-            ApplicationLogger.LogError(this, _message, _exception);
+            this.LogError(_message, _exception);
             _testLogger.Validate(LogLevel.Error, _message, _exception);
         }
 
         //------------------------------------------CRITICAL------------------------------------------//
 
         [Fact]
-        public void should_call_logcritical()
+        public void should_call_logcritical_extension()
         {
-            ApplicationLogger.LogCritical(this, _message);
+            this.LogCritical(_message);
             _testLogger.Validate(LogLevel.Critical, _message);
         }
 
         [Fact]
-        public void should_call_logcritical_with_exception()
+        public void should_call_logcritical_with_exception_extension()
         {
-            ApplicationLogger.LogCritical(this, _message, _exception);
+            this.LogCritical(_message, _exception);
             _testLogger.Validate(LogLevel.Critical, _message, _exception);
         }
     }

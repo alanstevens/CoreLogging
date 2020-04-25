@@ -23,6 +23,7 @@
             var sourceType = GetSourceType(loggingCategory);
 
             var logger = LoggerFactoryExtensions.CreateLogger(_factory, sourceType);
+
             return new CoreLogger(logger);
         }
 

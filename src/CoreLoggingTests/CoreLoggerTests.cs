@@ -3,45 +3,10 @@
     using System;
     using CoreLogging;
     using Microsoft.Extensions.Logging;
-    using Shouldly;
     using Xunit;
 
     public class CoreLoggerTests
     {
-        internal class TestLogger : ILogger
-        {
-            public LogLevel LogLevel { get; private set; }
-            public EventId EventId { get; private set; }
-            public Exception Exception { get; private set; }
-            public string Message { get; private set; }
-
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            {
-                LogLevel = logLevel;
-                EventId = eventId;
-                Exception = exception;
-                Message = formatter(state, exception);
-            }
-
-            public bool IsEnabled(LogLevel logLevel)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IDisposable BeginScope<TState>(TState state)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Validate(LogLevel logLevel, string message, Exception exception = null, EventId eventId = default)
-            {
-                this.LogLevel.ShouldBe(logLevel);
-                this.Message.ShouldBe(message);
-                this.Exception.ShouldBe(exception);
-                this.EventId.ShouldBe(eventId);
-            }
-        }
-
         public CoreLoggerTests()
         {
             _logger = new TestLogger();
