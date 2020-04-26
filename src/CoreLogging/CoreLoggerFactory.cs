@@ -5,7 +5,7 @@
 
     public class CoreLoggerFactory : ICoreLoggerFactory
     {
-        private readonly ILoggerFactory _factory;
+        readonly ILoggerFactory _factory;
 
         public CoreLoggerFactory(ILoggerFactory factory)
         {
@@ -27,7 +27,7 @@
             return new CoreLogger(logger);
         }
 
-        private static Type GetSourceType(object source)
+        static Type GetSourceType(object source)
         {
             var sourceType = source.GetType();
             if (sourceType == typeof(Type))

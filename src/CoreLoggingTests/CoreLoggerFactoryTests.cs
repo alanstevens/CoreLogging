@@ -9,8 +9,8 @@
 
     public class CoreLoggerFactoryTests
     {
-        private ILoggerFactory _factory;
-        private CoreLoggerFactory _factoryCore;
+        readonly ILoggerFactory _factory;
+        readonly CoreLoggerFactory _factoryCore;
 
         public CoreLoggerFactoryTests()
         {

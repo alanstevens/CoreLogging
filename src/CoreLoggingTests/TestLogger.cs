@@ -6,17 +6,17 @@
 
     internal class TestLogger : ILogger
     {
-        public LogLevel LogLevel { get; private set; }
-        public EventId EventId { get; private set; }
-        public Exception Exception { get; private set; }
-        public string Message { get; private set; }
+        LogLevel _logLevel;
+        EventId _eventId;
+        Exception _exception;
+        string _message;
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            LogLevel = logLevel;
-            EventId = eventId;
-            Exception = exception;
-            Message = formatter(state, exception);
+            _logLevel = logLevel;
+            _eventId = eventId;
+            _exception = exception;
+            _message = formatter(state, exception);
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -31,10 +31,10 @@
 
         public void Validate(LogLevel logLevel, string message, Exception exception = null, EventId eventId = default)
         {
-            LogLevel.ShouldBe(logLevel);
-            Message.ShouldBe(message);
-            Exception.ShouldBe(exception);
-            EventId.ShouldBe(eventId);
+            _logLevel.ShouldBe(logLevel);
+            _message.ShouldBe(message);
+            _exception.ShouldBe(exception);
+            _eventId.ShouldBe(eventId);
         }
     }
 
@@ -56,5 +56,4 @@
 
         public void AddProvider(ILoggerProvider provider) { }
     }
-
 }

@@ -11,7 +11,7 @@
 
     public class CoreLogger : ICoreLogger
     {
-        private readonly ILogger _logger;
+        readonly ILogger _logger;
 
         public CoreLogger(ILogger logger) => _logger = logger;
 

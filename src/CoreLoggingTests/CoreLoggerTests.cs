@@ -13,11 +13,11 @@
             _coreLogger = new CoreLogger(_logger);
         }
 
-        private readonly CoreLogger _coreLogger;
-        private readonly TestLogger _logger;
-        private readonly string _message = "message";
-        private readonly Exception _exception = new Exception();
-        private readonly EventId _eventId = new EventId(5,"my event");
+        readonly CoreLogger _coreLogger;
+        readonly TestLogger _logger;
+        readonly string _message = "message";
+        readonly Exception _exception = new Exception();
+        readonly EventId _eventId = new EventId(5,"my event");
 
         //------------------------------------------DEBUG------------------------------------------//
 
