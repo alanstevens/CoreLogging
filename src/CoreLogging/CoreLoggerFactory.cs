@@ -20,14 +20,14 @@
 
         public ICoreLogger CreateLogger(object loggingCategory)
         {
-            var sourceType = GetSourceType(loggingCategory);
+            var categoryType = GetCategoryType(loggingCategory);
 
-            var logger = LoggerFactoryExtensions.CreateLogger(_factory, sourceType);
+            var logger = LoggerFactoryExtensions.CreateLogger(_factory, categoryType);
 
             return new CoreLogger(logger);
         }
 
-        static Type GetSourceType(object source)
+        static Type GetCategoryType(object source)
         {
             var sourceType = source.GetType();
             if (sourceType == typeof(Type))
