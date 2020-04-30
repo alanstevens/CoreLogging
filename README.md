@@ -1,44 +1,43 @@
 # Core Logging
-This project is a set of abstractions over the dotnet core logging framework.
+CoreLogging is a set of abstractions over the .NET Core logging framework. It aims to make logging more accessable and testable.
 
 CoreLogging is available as a nuget package : 
 
 https://www.nuget.org/packages/corelogging
 
-It is welcome news that [logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x) is a first class service in the dotnet core framework. This project provides some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction.
+ [Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1) is now a first class service in the .NET Core framework. This project provides some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction:
 
 ## Testable Interfaces
-While Microsoft provides an `ILogger` interface, the frequently called logging methods are all extension methods. This makes it difficult to determine if your logging message was called. Steve Smith has an excellent [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these difficulties.
+Microsoft provides an `ILogger` interface, but the frequently called logging methods are extension methods. This makes it difficult to test that the correct logging method was called. Steve Smith has an [article](https://ardalis.com/testing-logging-in-aspnet-core) laying out these challenges.
 
-This project follows his recommendation to use an adapter to wrap the framework `Logger`. The result is `ICoreLogger`. `ICoreLogger` is easy to mock and test and has the most used logging methods directly on the interface rather than using extension methods
+ CoreLogging follows Steve's recommendation to use an adapter to wrap the framework `ILogger` interface. The result is `ICoreLogger`. `ICoreLogger` is easy to mock and test and has logging methods directly on the interface that mirror the `ILogger` extension methods
 
-There is also a generic `ICoreLogger<T>` which you should use on your constructor for dependency injection..
+There is also a generic `ICoreLogger<T>` to use on a constructor for dependency injection.
 
 ## Static Logger
-While injecting an `ICoreLogger` is neat and testable, putting the interface on every constructor gets old fast. This project aims to make logging available everywhere. The first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test. but `ApplicationLogger` is safe to call at test time.  If  `Initialize()` is never called, the logging methods are no-op.
+While `ICoreLogger` is clean and testable, putting the interface on every constructor gets old fast. CoreLogging aims to make logging easily accessable. The first step in that direction is a static logger class called `ApplicationLogger`. Static classes can be tricky to test, but `ApplicationLogger` is safe to call at test time.  If `Initialize()` is never called, the logging methods are no-op.
 
 Call the `ApplictionLogger` like so:
 ``` C#
 ApplicationLogger.LogWarning(this, "Danger, Will Robinson!");
 ```
-To test logging with `ApplicationLogger`, mock an `ICoreLoggerFactory` that returns a mocked `ICoreLogger`. Call `ApplicationLogger.Initialize()` with your mocked factory and verify calls to the `ICoreLogger`.
 
 ## Extension Methods
-This may be one step too far down the rabbit hole for some people. The goal is for logging to be ambiently available everywhere. To that end, there is a set of extension methods on `object` for the most common logging methods.  This means you can simply call:
+ The goal of CoreLogging is to make logging easily available everywhere. To that end, there is a set of extension methods on `object` for the most common logging methods.  This means you can simply call:
 ``` C#
 this.LogInformation("Bow ties are cool.");
 ```
-The extension methods are in a separate namespace, so they will not pollute your intellisense unless you explicitly import them. The extension methods call `ApplicationLogger` internally, so they can be tested the same as above.
+The extension methods are in a separate namespace, so they will not pollute your intellisense unless you explicitly import them. The extension methods call `ApplicationLogger` internally, so they have no side effects at test time.
 
 ## Testing
-See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of the test approaches described above. 
+See the [unit tests](https://github.com/alanstevens/CoreLogging/tree/master/src/CoreLoggingTests) for examples of how to use the CoreLogging components within your tests. 
 
 ## Startup
-There is a `.AddCoreLogging()` extension method on `IServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after `.AddMVC()` in `Startup.cs` like so:
+There is a `.AddCoreLogging()` extension method on `IServiceCollection` to configure Core Logging. Simply chain `.AddCoreLogging()` after the `.AddLogging()` framework extension method to setup CoreLogging in `Startup.cs` like so:
 
 ``` C#
-            services.AddMvc()
-                .Services
+            services
+                .AddLogging();
                 .AddCoreLogging();
 ```
 
