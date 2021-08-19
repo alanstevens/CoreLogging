@@ -1,10 +1,6 @@
 # Core Logging
 CoreLogging is a set of abstractions over the .NET Core logging framework. It aims to make logging more accessable and testable.
 
-CoreLogging is available as a nuget package : 
-
-https://www.nuget.org/packages/corelogging
-
  [Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1) is now a first class service in the .NET Core framework. This project provides some wrappers and extensions to make logging in dotnet core even easier to work with. There are three levels of abstraction:
 
 ## Testable Interfaces
